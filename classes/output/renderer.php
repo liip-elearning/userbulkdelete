@@ -13,7 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-namespace tool_zhaw_bulkdelete\output;
+namespace tool_userbulkdelete\output;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -24,7 +24,7 @@ use plugin_renderer_base;
 /**
  * Class renderer
  *
- * @package tool_zhaw_bulkdelete\output
+ * @package tool_userbulkdelete\output
  * TODO Translate.
  */
 class renderer extends plugin_renderer_base {

@@ -15,13 +15,13 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Adds zhaw bulk delete link in admin tree.
+ * Adds userbulkdelete link in admin tree.
  *
- * @package    tool_zhaw_bulkdelete
+ * @package    tool_userbulkdelete
  */
 defined('MOODLE_INTERNAL') || die();
 
 if ($hassiteconfig) {
     $url = $CFG->wwwroot . '/' . $CFG->admin . '/tool/userbulkdelete/index.php';
-    $ADMIN->add('accounts', new admin_externalpage('zhawuserbulk', get_string('menu', 'tool_userbulkdelete'), $url));
+    $ADMIN->add('accounts', new admin_externalpage('userbulkdelete', get_string('menu', 'tool_userbulkdelete'), $url));
 }

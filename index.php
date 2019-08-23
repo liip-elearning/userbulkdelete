@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 use core\task\manager;
-use tool_zhaw_bulkdelete\deleteuser_task;
+use tool_userbulkdelete\deleteuser_task;
 
 require_once('../../../config.php');
 require_once($CFG->libdir . '/adminlib.php');
@@ -23,11 +23,11 @@ require_once($CFG->libdir . '/adminlib.php');
 $confirm = optional_param('confirm', 0, PARAM_BOOL);
 
 require_login();
-admin_externalpage_setup('zhaw' . 'userbulk');
+admin_externalpage_setup('userbulkdelete');
 require_capability('moodle/user:delete', context_system::instance());
 
-/** @var \tool_zhaw_bulkdelete\output\renderer $renderer */
-$renderer = $PAGE->get_renderer("tool_zhaw_bulkdelete");
+/** @var \tool_userbulkdelete\output\renderer $renderer */
+$renderer = $PAGE->get_renderer("tool_userbulkdelete");
 
 $execute = optional_param("action", "preview", PARAM_ALPHA) === "delete" and confirm_sesskey();
 

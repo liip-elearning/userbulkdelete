@@ -16,11 +16,11 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * tool_zhaw_bulkdelete
+ * tool_userbulkdelete
  *
- * @package    tool_zhaw_bulkdelete
+ * @package    tool_userbulkdelete
  */
 function tool_userbulkdelete_install() {
-    // TODO Setup an HTML Block on the page 'zhawuserbulk' with a link to the tool.
+    // TODO Setup an HTML Block on the page 'userbulkdelete' with a link to the tool.
 }
 
