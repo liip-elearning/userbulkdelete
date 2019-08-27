@@ -20,7 +20,9 @@ defined('MOODLE_INTERNAL') || die();
  *
  * @package    tool_userbulkdelete
  */
-function tool_userbulkdelete_install() {
+function xmldb_tool_userbulkdelete_install() {
     // TODO Setup an HTML Block on the page 'userbulkdelete' with a link to the tool.
+    global $CFG;
+
 }
 
