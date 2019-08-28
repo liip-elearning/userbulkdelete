@@ -19,7 +19,7 @@ defined('MOODLE_INTERNAL') || die();
 
 use core\task\adhoc_task;
 
-class deleteuser_task extends adhoc_task {
+class deleteuser_task extends adhoc_task  {
 
     /**
      * @param int $usertodelete
@@ -28,9 +28,10 @@ class deleteuser_task extends adhoc_task {
      */
     public static function create($usertodelete, int $curentuser = null) {
         $task = new self();
-
         $task->set_custom_data(["userids" => (array) $usertodelete]);
         $task->set_userid($curentuser);
+        //error_log('Task has been instantiated for user -> '. $usertodelete);
+        var_dump($task);
         return $task;
     }
 
@@ -41,10 +42,11 @@ class deleteuser_task extends adhoc_task {
     public function execute() {
         global $DB;
         $data = $this->get_custom_data();
+        error_log("starting execution ". $data->userids[0]);
         $userids = $data->userids ?? [];
 
         if (empty($userids)) {
-            debugging("No users set in the task !");
+            //debugging("No users set in the task !");
             return;
         }
 
@@ -53,14 +55,17 @@ class deleteuser_task extends adhoc_task {
 
         $errors = [];
         foreach ($rs as $user) {
-            if (is_siteadmin($user)) {
+            // Not necessary, this has been filtered when the task was created (index.php)
+            // Why would you throw an error to retry admin or current user deletion?
+
+            /*if (is_siteadmin($user)) {
                 $errors[] = ["reason" => "is_admin", "user" => $user]; // TODO Translate reason.
                 continue;
             }
             if ($this->get_userid() == $user->id) {
                 $errors[] = ["reason" => "current_user", "user" => $user];// TODO Translate reason.
                 continue;
-            }
+            }*/
             $result = delete_user($user);
             if (!$result) {
                 $errors[] = ["reason" => "failed", "user" => $user];// TODO Translate reason.

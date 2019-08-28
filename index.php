@@ -46,7 +46,12 @@ if ($execute) {
             // TODO Enqueue more user in a single task.
             $task = deleteuser_task::create($user->id, $USER->id);
             manager::queue_adhoc_task($task);
+            \core\notification::success('Creando la tarea');
+            //delete_user($user);
+           error_log("Meti la tarea para el user: ". $user->id);
+
         } else {
+            // no need as well, but it is a failsafe
             unset($SESSION->bulk_users[$user->id]);
         }
     }
