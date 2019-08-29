@@ -15,16 +15,25 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Plugin version info
+ * Access permission for tool userbulkdelete
  *
- * @package    tool_xmldb
- * @copyright  2003 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    tool_userbulkdelete
+ * @copyright  2019 Liip SA <elearning@liip.ch>
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2019082909;
-$plugin->requires  = 2018050800; // Requires this Moodle version.
-$plugin->component = 'tool_userbulkdelete';
-
+$capabilities = [
+    'tool/userbulkdelete:view_notification' => [
+        'riskbitmask' => RISK_PERSONAL,
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => [
+            'teacher' => CAP_ALLOW,
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW,
+            'coursecreator' => CAP_ALLOW
+        ],
+        'clonepermissionsfrom' => 'moodle/site:viewreports',
+    ]
+];

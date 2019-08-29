@@ -16,6 +16,7 @@
 
 use core\task\manager;
 use tool_userbulkdelete\deleteuser_task;
+use tool_userbulkdelete\queuecompletion_task;
 
 require_once('../../../config.php');
 require_once($CFG->libdir . '/adminlib.php');
@@ -39,21 +40,22 @@ if ($execute) {
     // Do the deletion.
     list($in, $params) = $DB->get_in_or_equal($SESSION->bulk_users);
     $rs = $DB->get_recordset_select('user', "deleted = 0 and id $in", $params);
-    echo $renderer->get_success_message(count($params));
-
+    $pid = time();
+    $deletioncount = 0;
     foreach ($rs as $user) {
         if (!is_siteadmin($user) and $USER->id != $user->id) {
-            // TODO Enqueue more user in a single task.
-            $task = deleteuser_task::create($user->id, $USER->id);
+            $task = deleteuser_task::create($user->id, $USER->id, $pid);
             manager::queue_adhoc_task($task);
-            \core\notification::success('Creando la tarea');
-            //delete_user($user);
-           error_log("Meti la tarea para el user: ". $user->id);
-
+            $deletioncount++;
         } else {
             // no need as well, but it is a failsafe
             unset($SESSION->bulk_users[$user->id]);
         }
+    }
+    echo $renderer->get_success_message($deletioncount);
+    if($deletioncount) {
+        $notificationtask = queuecompletion_task::create($pid, $USER->id, $deletioncount);
+        manager::queue_adhoc_task($notificationtask);
     }
     unset($SESSION->bulk_users);
 
@@ -88,7 +90,7 @@ if ($execute) {
         $canbedeleted = !is_siteadmin($user) && $USER->id != $user->id;
         $table->data[] = [
                 $user->id,
-                $user->username,
+                $user->firstname.' '.$user->lastname,
                 $user->email,
                 $canbedeleted ? $renderer->get_ok_picto() : $renderer->get_failed_picto()
         ];
@@ -110,3 +112,5 @@ if ($execute) {
         echo $renderer->get_no_selection();
     }
 }
+
+echo $OUTPUT->footer();
