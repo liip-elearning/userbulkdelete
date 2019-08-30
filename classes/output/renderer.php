@@ -34,7 +34,7 @@ class renderer extends plugin_renderer_base {
      */
     public function get_no_selection() {
 
-        return $this->output->notification("You must provide a selection from the bulk user tool first.") .
+        return $this->output->notification(get_string('getnoselection', 'tool_userbulkdelete')) .
                 $this->get_backlink();
     }
 
@@ -43,7 +43,8 @@ class renderer extends plugin_renderer_base {
      * @throws \moodle_exception
      */
     public function get_backlink() {
-        return html_writer::link(new moodle_url("/admin/user/user_bulk.php"), "Back to Bulk action",
+        return html_writer::link(new moodle_url("/admin/user/user_bulk.php"),
+            get_string('getbacklink', 'tool_userbulkdelete'),
                 ["class" => 'btn btn-secondary']);
     }
 
@@ -51,7 +52,7 @@ class renderer extends plugin_renderer_base {
      * @return string
      */
     public function get_title() {
-        return html_writer::tag("h2", "The following users will be scheduled for asynchronous deletion");
+        return html_writer::tag("h2", get_string('gettitle', 'tool_userbulkdelete'));
     }
 
     /**
@@ -62,7 +63,7 @@ class renderer extends plugin_renderer_base {
         if (empty($errors)) {
             return '';
         }
-        return html_writer::tag("p", sprintf("%d user(s) can not be deleted.", count($errors)));
+        return html_writer::tag("p", get_string('geterrors', 'tool_userbulkdelete', count($errors)));
     }
 
     /**
@@ -76,7 +77,7 @@ class renderer extends plugin_renderer_base {
      * @return string
      */
     public function get_failed_picto() {
-        return $this->output->pix_icon('i/warning', "Cannot delete an administrator account nor the current user", '',
+        return $this->output->pix_icon('i/warning', get_string('cannotdeleteadmin', 'tool_userbulkdelete'), '',
                 array('class' => 'iconsmall text-danger'));
     }
 
@@ -85,7 +86,7 @@ class renderer extends plugin_renderer_base {
      * @return string
      */
     public function get_success_message(int $number) {
-        return html_writer::tag("h2", sprintf("%d user(s) have been scheduled to be deleted", $number));
+        return html_writer::tag("h2", get_string('getsuccessmsg', 'tool_userbulkdelete', $number));
     }
 
     /**
@@ -93,7 +94,8 @@ class renderer extends plugin_renderer_base {
      * @throws \moodle_exception
      */
     public function get_dolink() {
-        return html_writer::link(new moodle_url($this->page->url, ["sesskey" => sesskey(), "action" => "delete"]), "Start asynchronous deletion",
+        return html_writer::link(new moodle_url($this->page->url, ["sesskey" => sesskey(), "action" => "delete"]),
+            get_string('getdolink', 'tool_userbulkdelete'),
                 ["class" => 'btn btn-primary']);
     }
 

@@ -77,8 +77,8 @@ if ($execute) {
             'id',
             get_string('fullname'),
             get_string('email'),
-            'Can be deleted'
-    ]; // TODO Translate.
+            get_string('canbedeleted', 'tool_userbulkdelete')
+    ];
     $table->size = ['3%', '47%', '50%'];
     $table->align = ['left'];
     $table->data = [];

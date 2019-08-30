@@ -39,7 +39,7 @@ class deleteuser_task extends adhoc_task  {
      * Throw exceptions on errors (the job will be retried).
      */
     public function execute() {
-        global $DB, $PAGE;
+        global $DB;
         $data = $this->get_custom_data();
         $userid = $data->userid ?? [];
 
@@ -55,12 +55,17 @@ class deleteuser_task extends adhoc_task  {
         foreach ($rs as $user) {
             $result = delete_user($user);
             if (!$result) {
-                $errors[] = ["reason" => "unknown", "user" => $user];// TODO Translate reason.
+                $errors[] = ["reason" => "unknown", "user" => $user];
             }
         }
         $rs->close();
         foreach ($errors as $error) {
             // Notifying
+	    $details = new \stdClass();
+            $details->username = $error["user"]->firstname.' '.$error["user"]->lastname;
+            $details->pid = $data->pid;
+            $details->userid = $error["user"]->id;
+            $details->reason = $error["reason"];
             $username = $error["user"]->firstname.' '.$error["user"]->lastname;
             $message = new message();
             $message->component         = 'tool_userbulkdelete';
@@ -70,8 +75,8 @@ class deleteuser_task extends adhoc_task  {
             $message->smallmessage      = '';
             $message->fullmessageformat = FORMAT_HTML;
             $message->name              = 'tasks_status';
-            $message->subject           = 'Error: The asynchronous deletion of user '.$username.' failed'; // TRANSLATE.
-            $message->fullmessagehtml   = 'Ooops! <br />The async user deletion task for '.$username.' has failed, it will be attempted again and eventually dropped. <br />You can also try to delete the account manually.<br />Process id = '.$data->pid;
+            $message->subject           = get_string('userdeletionfailed', 'tool_userbulkdelete', $details);
+            $message->fullmessagehtml   = get_string('userdeletionfailedhtml', 'tool_userbulkdelete', $details);
             message_send($message);
 
             // Logging
@@ -82,7 +87,7 @@ class deleteuser_task extends adhoc_task  {
             ));
             $event->trigger();
 
-            $exceptionmessage = sprintf("Unable to delete user with id %d. Reason: %s", $error["user"]->id, $error["reason"]);
+            $exceptionmessage = get_string('exceptionuserdeletion', 'tool_userbulkdelete', $details);
             throw new \RuntimeException($exceptionmessage);
         }
     }

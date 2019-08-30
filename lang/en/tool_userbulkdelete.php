@@ -27,4 +27,27 @@ $string['eventdeleteuser_error'] = 'Deletion failed';
 $string['pluginname'] = 'Bulk asynchronous user deletion';
 $string['menu'] = 'Bulk asynchronous user deletion';
 $string['messageprovider:tasks_status'] = 'Receive status messages for the bulk deletion of users';
-
+$string['getbacklink'] = 'Back to Bulk action';
+$string['getnoselection'] = 'You must provide a selection from the bulk user tool first.';
+$string['gettitle'] = 'The following users will be scheduled for asynchronous deletion';
+$string['geterrors'] = '{$a} user(s) can not be deleted.';
+$string['cannotdeleteadmin'] = 'Cannot delete an administrator account nor the current user.';
+$string['getsuccessmsg'] = '{$a} user(s) have been scheduled to be deleted';
+$string['getdolink'] = 'Start asynchronous deletion';
+$string['canbedeleted'] = 'Can be deleted';
+$string['userdeletionfailed'] = 'Error: The asynchronous deletion of user {$a->username} failed';
+$string['userdeletionfailedhtml'] = 'Ooops!<br />
+The async user deletion task for {$a->username} has failed, it will be attempted again and eventually dropped.<br />
+You can also try to delete the account manually.<br />
+Process id = {$a->pid}.';
+$string['exceptionuserdeletion'] = 'Unable to delete user with id {$a->userid}. Reason: {$a->reason}';
+$string['bulksuccesssubject'] = 'Success: Bulk asynchronous deletion of users completed';
+$string['bulksuccesshtml'] = 'Greetings!<br />
+All of the async user deletion tasks started on {$a->start} have been processed.<br />
+Deleted users = {$a->deletioncount}/{$a->deletioncount}<br />
+Process id = {$a->pid}';
+$string['bulkfailsubject'] = 'Fail: Bulk asynchronous deletion of users failed';
+$string['bulkfailshtml'] = 'Ooops!<br />
+{$a->inqueue}/{$a->deletioncount} of the async user deletion tasks started on {$a->start} have failed, they will be tried again later.<br />
+Process id = {$a->pid}';
+$string['exceptionbulkfail'] = 'The deletion tasks with id = {$a->pid} have not yet been completed.';
