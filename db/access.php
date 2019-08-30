@@ -18,7 +18,8 @@
  * Access permission for tool userbulkdelete
  *
  * @package    tool_userbulkdelete
- * @copyright  2019 Liip SA <elearning@liip.ch>
+ * @copyright  2019 Liip
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();

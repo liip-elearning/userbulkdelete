@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'tool_xmldb', language 'en', branch 'MOODLE_22_STABLE'
+ * Strings for component 'tool_userbulkdelete', language 'en'
  *
- * @package    tool_xmldb
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @package    tool_userbulkdelete
+ * @copyright  2019 Liip
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -55,5 +55,3 @@ User(s) details<br />
 ============================================<br />';
 $string['bulkfailshtmluserinfo'] = '{$a->fullname} <a href="{$a->wwwroot}/user/view.php?id={$a->userid}" target="_blank">[View user Profile]</a><br />';
 $string['exceptionbulkfail'] = 'The deletion tasks with id = {$a->pid} have not yet been completed.';
-$string['blockcontenttext'] = 'When a large amount of users have been selected for deletion, the tasks will be executed asynchronously in the background to avoid server timeout issues.';
-$string['blockcontentbutton'] = 'Perform Bulk Async Deletion';

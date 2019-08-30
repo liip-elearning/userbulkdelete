@@ -15,15 +15,16 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Adds userbulkdelete link in admin tree.
+ * Plugin block_userbulkdelete version info
  *
- * @package    tool_userbulkdelete
+ * @package    block_userbulkdelete
  * @copyright  2019 Liip
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 defined('MOODLE_INTERNAL') || die();
 
-if ($hassiteconfig) {
-    $url = $CFG->wwwroot . '/' . $CFG->admin . '/tool/userbulkdelete/index.php';
-    $ADMIN->add('accounts', new admin_externalpage('userbulkdelete', get_string('menu', 'tool_userbulkdelete'), $url));
-}
+$plugin->version   = 2019090509;
+$plugin->requires  = 2018050800; // Requires this Moodle version.
+$plugin->component = 'block_userbulkdelete';
+$plugin->dependencies = ['tool_userbulkdelete' => ANY_VERSION];

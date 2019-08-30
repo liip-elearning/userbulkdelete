@@ -116,6 +116,7 @@ if ($execute) {
     } else {
         echo $renderer->get_no_selection();
     }
+
 }
 
 echo $OUTPUT->footer();

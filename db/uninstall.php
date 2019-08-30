@@ -13,17 +13,24 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+defined('MOODLE_INTERNAL') || die();
 
 /**
- * Adds userbulkdelete link in admin tree.
+ * Uninstall script for tool_userbulkdelete
  *
  * @package    tool_userbulkdelete
  * @copyright  2019 Liip
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
+function xmldb_tool_userbulkdelete_uninstall() {
+    global $DB;
 
-if ($hassiteconfig) {
-    $url = $CFG->wwwroot . '/' . $CFG->admin . '/tool/userbulkdelete/index.php';
-    $ADMIN->add('accounts', new admin_externalpage('userbulkdelete', get_string('menu', 'tool_userbulkdelete'), $url));
+    // Delete all the block instances!
+    $binstance = $DB->get_record_select('block_instances', "blockname = 'userbulkdelete'");
+    if ($binstance) {
+        blocks_delete_instance($binstance);
+    }
+    return true;
+
 }
+

@@ -25,10 +25,9 @@
  *     - Message API: {@link http://docs.moodle.org/dev/Message_API}
  *     - Upgrade API: {@link http://docs.moodle.org/dev/Upgrade_API}
  *
- * @package   core
- * @category  message
- * @copyright 2008 onwards Martin Dougiamas  http://dougiamas.com
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    tool_userbulkdelete
+ * @copyright  2019 Liip
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();

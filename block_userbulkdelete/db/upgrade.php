@@ -13,17 +13,31 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+defined('MOODLE_INTERNAL') || die();
 
 /**
- * Adds userbulkdelete link in admin tree.
+ * Upgrade script for block_userbulkdelete
  *
- * @package    tool_userbulkdelete
+ * @package    block_userbulkdelete
  * @copyright  2019 Liip
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
+function xmldb_block_userbulkdelete_upgrade() {
+    global $DB;
 
-if ($hassiteconfig) {
-    $url = $CFG->wwwroot . '/' . $CFG->admin . '/tool/userbulkdelete/index.php';
-    $ADMIN->add('accounts', new admin_externalpage('userbulkdelete', get_string('menu', 'tool_userbulkdelete'), $url));
+    $result = true;
+
+    $binstance = $DB->get_record_select('block_instances',
+        "blockname = 'userbulkdelete' AND pagetypepattern ='admin-user-user_bulk'");
+    if (!$binstance) {
+        // Create a dummy page object referring to user_bulk page & adding the block.
+        $pagebulk = new moodle_page();
+        $pagebulk->set_pagetype('admin-user-user_bulk');
+        $pagebulk->set_pagelayout('admin');
+        $pagebulk->set_context(null);
+        $pagebulk->blocks->add_region('side-pre');
+        $pagebulk->blocks->add_block('userbulkdelete', 'side-pre', 3, 1);
+    }
+
+    return $result;
 }

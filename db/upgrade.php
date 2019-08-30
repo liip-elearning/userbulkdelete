@@ -16,9 +16,11 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * tool_userbulkdelete
+ * Upgrade script for tool_userbulkdelete
  *
  * @package    tool_userbulkdelete
+ * @copyright  2019 Liip
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 function xmldb_tool_userbulkdelete_upgrade($oldversion) {
     global $CFG, $DB;

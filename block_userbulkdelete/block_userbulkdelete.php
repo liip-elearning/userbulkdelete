@@ -14,16 +14,23 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Adds userbulkdelete link in admin tree.
- *
- * @package    tool_userbulkdelete
- * @copyright  2019 Liip
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
 defined('MOODLE_INTERNAL') || die();
 
-if ($hassiteconfig) {
-    $url = $CFG->wwwroot . '/' . $CFG->admin . '/tool/userbulkdelete/index.php';
-    $ADMIN->add('accounts', new admin_externalpage('userbulkdelete', get_string('menu', 'tool_userbulkdelete'), $url));
+class block_userbulkdelete extends block_base {
+
+    public function init() {
+        $this->title = get_string('blocktitle', 'block_userbulkdelete');
+    }
+
+    public function get_content() {
+        if ($this->content !== null) {
+            return $this->content;
+        }
+
+        $this->content         = new stdClass;
+        $this->content->text   = get_string('blockcontenttext', 'block_userbulkdelete');
+        $this->content->text .= get_string('blockcontentbutton', 'block_userbulkdelete');
+
+        return $this->content;
+    }
 }

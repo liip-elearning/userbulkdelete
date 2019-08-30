@@ -15,16 +15,16 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Plugin version info
+ * Plugin tool_userbulkdelete version info
  *
- * @package    tool_xmldb
- * @copyright  2003 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
+ * @package    tool_userbulkdelete
+ * @copyright  2019 Liip
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2019090401;
+$plugin->version   = 2019090501;
 $plugin->requires  = 2018050800; // Requires this Moodle version.
 $plugin->component = 'tool_userbulkdelete';
 
