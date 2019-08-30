@@ -48,12 +48,12 @@ if ($execute) {
             manager::queue_adhoc_task($task);
             $deletioncount++;
         } else {
-            // Remove the siteadmin and the currentuser from the session
+            // Remove the siteadmin and the currentuser from the session.
             unset($SESSION->bulk_users[$user->id]);
         }
     }
     echo $renderer->get_success_message($deletioncount);
-    if($deletioncount) {
+    if ($deletioncount) {
         $notificationtask = queuecompletion_task::create($pid, $USER->id, $deletioncount);
         manager::queue_adhoc_task($notificationtask);
     }

@@ -67,11 +67,11 @@ class deleteuser_task extends adhoc_task  {
             $message->component         = 'tool_userbulkdelete';
             $message->userfrom          = \core_user::get_noreply_user();
             $message->userto            = $this->get_userid();
-            $message->notification      = 1; //this is only set to 0 for personal messages between users
+            $message->notification      = 1; // This is only set to 0 for personal messages between users.
             $message->smallmessage      = '';
             $message->fullmessageformat = FORMAT_HTML;
             $message->name              = 'tasks_status';
-            $message->subject           = 'Error: The asynchronous deletion of user '.$username.' failed'; //TRANSLATE
+            $message->subject           = 'Error: The asynchronous deletion of user '.$username.' failed'; // TRANSLATE.
             $message->fullmessagehtml   = 'Ooops! <br />The async user deletion task for '.$username.' has failed, it will be attempted again and eventually dropped. <br />You can also try to delete the account manually.<br />Process id = '.$data->pid;
             message_send($message);
 
