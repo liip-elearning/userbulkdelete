@@ -32,7 +32,7 @@ $renderer = $PAGE->get_renderer("tool_userbulkdelete");
 
 $execute = optional_param("action", "preview", PARAM_ALPHA) === "delete" and confirm_sesskey();
 
-$PAGE->set_button($renderer->get_backlink() . ($execute ? "" : $renderer->get_dolink()));
+$PAGE->set_button($renderer->get_backlink());
 
 echo $OUTPUT->header();
 
@@ -48,7 +48,7 @@ if ($execute) {
             manager::queue_adhoc_task($task);
             $deletioncount++;
         } else {
-            // no need as well, but it is a failsafe
+            // Remove the siteadmin and the currentuser from the session
             unset($SESSION->bulk_users[$user->id]);
         }
     }

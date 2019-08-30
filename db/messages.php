@@ -35,11 +35,13 @@ defined('MOODLE_INTERNAL') || die();
 
 $messageproviders = [
 
-    'tasks_completed' => [
+    'tasks_status' => [
         'capability' => 'tool/userbulkdelete:view_notification',
         'defaults' => [
-            'popup' => MESSAGE_PERMITTED + MESSAGE_DEFAULT_LOGGEDIN + MESSAGE_FORCED,
-            'email' => MESSAGE_PERMITTED + MESSAGE_DEFAULT_LOGGEDOFF,
+            'popup' => MESSAGE_DEFAULT_LOGGEDIN + MESSAGE_DEFAULT_LOGGEDOFF + MESSAGE_FORCED,
+            'email' => MESSAGE_DEFAULT_LOGGEDOFF + MESSAGE_PERMITTED,
         ]
-    ]
+    ],
+
+
 ];

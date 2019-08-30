@@ -25,5 +25,5 @@
 $string['privacy:metadata'] = 'The bulk delete plugin does not store any personal data.';
 $string['pluginname'] = 'Bulk asynchronous user deletion';
 $string['menu'] = 'Bulk asynchronous user deletion';
-$string['messageprovider:tasks_completed'] = 'Receive messages upon successful completion of bulk deletion';
+$string['messageprovider:tasks_status'] = 'Receive status messages for the bulk deletion of users';
 

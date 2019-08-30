@@ -51,7 +51,7 @@ class renderer extends plugin_renderer_base {
      * @return string
      */
     public function get_title() {
-        return html_writer::tag("h2", "The following users will be deleted");
+        return html_writer::tag("h2", "The following users will be scheduled for asynchronous deletion");
     }
 
     /**
@@ -93,7 +93,7 @@ class renderer extends plugin_renderer_base {
      * @throws \moodle_exception
      */
     public function get_dolink() {
-        return html_writer::link(new moodle_url($this->page->url, ["sesskey" => sesskey(), "action" => "delete"]), "Delete",
+        return html_writer::link(new moodle_url($this->page->url, ["sesskey" => sesskey(), "action" => "delete"]), "Start asynchronous deletion",
                 ["class" => 'btn btn-primary']);
     }
 
