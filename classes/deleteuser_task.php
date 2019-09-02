@@ -39,7 +39,7 @@ class deleteuser_task extends adhoc_task  {
      * Throw exceptions on errors (the job will be retried).
      */
     public function execute() {
-        global $DB;
+        global $DB, $PAGE;
         $data = $this->get_custom_data();
         $userid = $data->userid ?? [];
 
@@ -60,8 +60,7 @@ class deleteuser_task extends adhoc_task  {
         }
         $rs->close();
         foreach ($errors as $error) {
-            // TODO decide if we send individual notifications or only the log them.
-
+            // Notifying
             $username = $error["user"]->firstname.' '.$error["user"]->lastname;
             $message = new message();
             $message->component         = 'tool_userbulkdelete';
@@ -74,6 +73,14 @@ class deleteuser_task extends adhoc_task  {
             $message->subject           = 'Error: The asynchronous deletion of user '.$username.' failed'; // TRANSLATE.
             $message->fullmessagehtml   = 'Ooops! <br />The async user deletion task for '.$username.' has failed, it will be attempted again and eventually dropped. <br />You can also try to delete the account manually.<br />Process id = '.$data->pid;
             message_send($message);
+
+            // Logging
+            $event = \tool_userbulkdelete\event\deleteuser_error::create(array(
+                'context' => $PAGE->context,
+                'relateduserid' => $error["user"]->id,
+                'other' => ["username" => $username, "pid" => $data->pid]
+            ));
+            $event->trigger();
 
             $exceptionmessage = sprintf("Unable to delete user with id %d. Reason: %s", $error["user"]->id, $error["reason"]);
             throw new \RuntimeException($exceptionmessage);
