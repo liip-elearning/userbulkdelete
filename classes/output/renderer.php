@@ -56,14 +56,25 @@ class renderer extends plugin_renderer_base {
     }
 
     /**
+     * @param int $errors List of failed users records.
+     * @return string
+     */
+    public function get_scheduleimpossible(int $quantity) {
+        if ($quantity == 0) {
+            return '';
+        }
+        return html_writer::tag("p", $this->get_failed_picto().' '.get_string('getscheduleimpossible', 'tool_userbulkdelete', (string)$quantity));
+    }
+
+    /**
      * @param object[] $errors List of failed users records.
      * @return string
      */
-    public function get_errors(array $errors) {
-        if (empty($errors)) {
+    public function get_schedulepossible(int $quantity) {
+        if ($quantity == 0) {
             return '';
         }
-        return html_writer::tag("p", get_string('geterrors', 'tool_userbulkdelete', count($errors)));
+        return html_writer::tag("p", $this->get_ok_picto().' '.get_string('getschedulepossible', 'tool_userbulkdelete',(string)$quantity));
     }
 
     /**

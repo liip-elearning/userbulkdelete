@@ -30,7 +30,8 @@ $string['messageprovider:tasks_status'] = 'Receive status messages for the bulk 
 $string['getbacklink'] = 'Back to Bulk action';
 $string['getnoselection'] = 'You must provide a selection from the bulk user tool first.';
 $string['gettitle'] = 'The following users will be scheduled for asynchronous deletion';
-$string['geterrors'] = '{$a} user(s) can not be deleted.';
+$string['getscheduleimpossible'] = '{$a} user(s) can not be deleted and will not be included in the process.';
+$string['getschedulepossible'] = '{$a} user(s) will be scheduled for deletion.';
 $string['cannotdeleteadmin'] = 'Cannot delete an administrator account nor the current user.';
 $string['getsuccessmsg'] = '{$a} user(s) have been scheduled to be deleted';
 $string['getdolink'] = 'Start asynchronous deletion';
@@ -51,3 +52,5 @@ $string['bulkfailshtml'] = 'Ooops!<br />
 {$a->inqueue}/{$a->deletioncount} of the async user deletion tasks started on {$a->start} have failed, they will be tried again later.<br />
 Process id = {$a->pid}';
 $string['exceptionbulkfail'] = 'The deletion tasks with id = {$a->pid} have not yet been completed.';
+$string['blockcontenttext'] = 'When a large amount of users have been selected for deletion, the tasks will be executed asynchronously in the background to avoid server timeout issues.';
+$string['blockcontentbutton'] = 'Perform Bulk Async Deletion';

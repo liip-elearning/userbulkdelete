@@ -84,6 +84,7 @@ if ($execute) {
     $table->data = [];
 
     $errors = [];
+    $possible = 0;
     $empty = true;
     foreach ($rs as $user) {
         $empty = false;
@@ -97,6 +98,7 @@ if ($execute) {
         if (!$canbedeleted) {
             $errors[] = $user;
         }
+        $possible++;
     }
 
     if ($rs !== []) {
@@ -104,9 +106,12 @@ if ($execute) {
     }
 
     if (!$empty) {
+        $impossible = count($errors);
+        $possible -= $impossible;
         echo $renderer->get_title();
         echo html_writer::table($table);
-        echo $renderer->get_errors($errors);
+        echo $renderer->get_schedulepossible($possible);
+        echo $renderer->get_scheduleimpossible($impossible);
         echo $renderer->get_dolink();
     } else {
         echo $renderer->get_no_selection();
