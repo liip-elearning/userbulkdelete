@@ -41,7 +41,7 @@ $string['userdeletionfailedhtml'] = 'Ooops!<br />
 The async user deletion task for {$a->username} has failed, it will be attempted again and eventually dropped.<br />
 You can also try to delete the account manually.<br />
 Process id = {$a->pid}.';
-$string['exceptionuserdeletion'] = 'Unable to delete user with id {$a->userid}. Reason: {$a->reason}';
+$string['exceptionuserdeletion'] = 'Unable to delete user with id {$a->userid}. Process ID = {$a->pid}';
 $string['bulksuccesssubject'] = 'Success: Bulk asynchronous deletion of users completed';
 $string['bulksuccesshtml'] = 'Greetings!<br />
 All of the async user deletion tasks started on {$a->start} have been processed.<br />
@@ -49,8 +49,11 @@ Deleted users = {$a->deletioncount}/{$a->deletioncount}<br />
 Process id = {$a->pid}';
 $string['bulkfailsubject'] = 'Fail: Bulk asynchronous deletion of users failed';
 $string['bulkfailshtml'] = 'Ooops!<br />
-{$a->inqueue}/{$a->deletioncount} of the async user deletion tasks started on {$a->start} have failed, they will be tried again later.<br />
-Process id = {$a->pid}';
+{$a->inqueue}/{$a->deletioncount} of the async user deletion tasks started on {$a->start} have failed, they will be tried again later.<br /><br />
+Process id = {$a->pid}<br /><br />
+User(s) details<br />
+============================================<br />';
+$string['bulkfailshtmluserinfo'] = '{$a->fullname} <a href="{$a->wwwroot}/user/view.php?id={$a->userid}" target="_blank">[View user Profile]</a><br />';
 $string['exceptionbulkfail'] = 'The deletion tasks with id = {$a->pid} have not yet been completed.';
 $string['blockcontenttext'] = 'When a large amount of users have been selected for deletion, the tasks will be executed asynchronously in the background to avoid server timeout issues.';
 $string['blockcontentbutton'] = 'Perform Bulk Async Deletion';

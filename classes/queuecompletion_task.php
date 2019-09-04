@@ -38,7 +38,7 @@ class queuecompletion_task extends adhoc_task {
      */
     public function execute() {
         // Check that no deletion task with PID exists.
-        global $DB;
+        global $DB, $CFG;
         $data = $this->get_custom_data();
         $pid = $data->pid;
         $params = ["class" => '\tool_userbulkdelete\deleteuser_task', "pid" => '%'.$pid.'%'];
@@ -63,13 +63,34 @@ class queuecompletion_task extends adhoc_task {
         $details->inqueue = $inqueue;
 
         if (!$inqueue) {
+            // Sending Success the Notification.
             $message->subject           = get_string('bulksuccesssubject', 'tool_userbulkdelete');
             $message->fullmessagehtml   = get_string('bulksuccesshtml', 'tool_userbulkdelete', $details);
             message_send($message);
         } else {
+            // Sending the Failure Notification.
             $message->subject           = get_string('bulkfailsubject', 'tool_userbulkdelete');
             $message->fullmessagehtml   = get_string('bulkfailshtml', 'tool_userbulkdelete', $details);
+
+            // First we get all the failed users.
+            $failures = $DB->get_recordset('tool_userbulkdelete_failures');
+            foreach ($failures as $faileduser) {
+                $userinfo = $DB->get_record('user', ['id' => $faileduser->userid], 'firstname, lastname');
+                $report = new \stdClass();
+                $report->userid = $faileduser->userid;
+                $report->fullname = $userinfo->firstname.' '.$userinfo->lastname;
+                $report->wwwroot = $CFG->wwwroot;
+                // The user information is added to the notification message.
+                $message->fullmessagehtml .= get_string('bulkfailshtmluserinfo', 'tool_userbulkdelete', $report);
+            }
+
+            // The database gets cleaned.
+            $DB->delete_records('tool_userbulkdelete_failures');
+
+            // The failure notification gets sent.
             message_send($message);
+
+            // Throwing the error so the adhoc task fails successfully ;) !
             $exceptionmessage = get_string('exceptionbulkfail', 'tool_userbulkdelete', $details);
             throw new \RuntimeException($exceptionmessage);
         }

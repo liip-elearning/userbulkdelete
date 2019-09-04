@@ -39,7 +39,7 @@ class deleteuser_task extends adhoc_task  {
      * Throw exceptions on errors (the job will be retried).
      */
     public function execute() {
-        global $DB;
+        global $DB, $PAGE;
         $data = $this->get_custom_data();
         $userid = $data->userid ?? [];
 
@@ -60,33 +60,26 @@ class deleteuser_task extends adhoc_task  {
         }
         $rs->close();
         foreach ($errors as $error) {
-            // Notifying
-	    $details = new \stdClass();
+
+            // In case of failure, we just save the related info on the DB in order to generate the final report.
+            $failuredetails = new \stdClass();
+            $failuredetails->timestamp = $data->pid;
+            $failuredetails->userid = $error["user"]->id;
+            $DB->insert_record('tool_userbulkdelete_failures', $failuredetails);
+
+            // Logging.
+            $details = new \stdClass();
+            $details->userid = $error["user"]->id;
             $details->username = $error["user"]->firstname.' '.$error["user"]->lastname;
             $details->pid = $data->pid;
-            $details->userid = $error["user"]->id;
-            $details->reason = $error["reason"];
-            $username = $error["user"]->firstname.' '.$error["user"]->lastname;
-            $message = new message();
-            $message->component         = 'tool_userbulkdelete';
-            $message->userfrom          = \core_user::get_noreply_user();
-            $message->userto            = $this->get_userid();
-            $message->notification      = 1; // This is only set to 0 for personal messages between users.
-            $message->smallmessage      = '';
-            $message->fullmessageformat = FORMAT_HTML;
-            $message->name              = 'tasks_status';
-            $message->subject           = get_string('userdeletionfailed', 'tool_userbulkdelete', $details);
-            $message->fullmessagehtml   = get_string('userdeletionfailedhtml', 'tool_userbulkdelete', $details);
-            message_send($message);
-
-            // Logging
             $event = \tool_userbulkdelete\event\deleteuser_error::create(array(
                 'context' => $PAGE->context,
                 'relateduserid' => $error["user"]->id,
-                'other' => ["username" => $username, "pid" => $data->pid]
+                'other' => ["username" => $details->username, "pid" => $data->pid]
             ));
             $event->trigger();
 
+            // Throwing the error so the adhoc task fails successfully ;) !
             $exceptionmessage = get_string('exceptionuserdeletion', 'tool_userbulkdelete', $details);
             throw new \RuntimeException($exceptionmessage);
         }

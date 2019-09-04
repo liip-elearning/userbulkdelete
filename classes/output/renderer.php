@@ -63,7 +63,8 @@ class renderer extends plugin_renderer_base {
         if ($quantity == 0) {
             return '';
         }
-        return html_writer::tag("p", $this->get_failed_picto().' '.get_string('getscheduleimpossible', 'tool_userbulkdelete', (string)$quantity));
+        return html_writer::tag("p", $this->get_failed_picto().' '.get_string('getscheduleimpossible',
+                'tool_userbulkdelete', (string)$quantity));
     }
 
     /**
@@ -74,7 +75,8 @@ class renderer extends plugin_renderer_base {
         if ($quantity == 0) {
             return '';
         }
-        return html_writer::tag("p", $this->get_ok_picto().' '.get_string('getschedulepossible', 'tool_userbulkdelete',(string)$quantity));
+        return html_writer::tag("p", $this->get_ok_picto().' '.get_string('getschedulepossible',
+                'tool_userbulkdelete', (string)$quantity));
     }
 
     /**
