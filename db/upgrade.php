@@ -49,6 +49,18 @@ function xmldb_tool_userbulkdelete_upgrade($oldversion) {
         // Userbulkdelete savepoint reached.
         upgrade_plugin_savepoint(true, 2019090400, 'tool', 'userbulkdelete');
     }
+    
+    // If the block has no instance, create it!
+    $binstance = $DB->get_record_select('block_instances', "blockname = 'userbulkdelete'");
+    if (!$binstance) {
+        // Create a dummy page object referring to user_bulk page & adding the block.
+        $pagebulk = new moodle_page();
+        $pagebulk->set_pagetype('admin-user-user_bulk');
+        $pagebulk->set_pagelayout('admin');
+        $pagebulk->set_context(null);
+        $pagebulk->blocks->add_region('side-pre');
+        $pagebulk->blocks->add_block('userbulkdelete', 'side-pre', 3, 1);
+    }
 
     return $result;
 

@@ -23,13 +23,11 @@ defined('MOODLE_INTERNAL') || die();
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 function xmldb_tool_userbulkdelete_uninstall() {
-    global $DB;
+    global $DB, $CFG;
 
-    // Delete all the block instances!
-    $binstance = $DB->get_record_select('block_instances', "blockname = 'userbulkdelete'");
-    if ($binstance) {
-        blocks_delete_instance($binstance);
-    }
+    require_once $CFG->dirroot.'/blocks/userbulkdelete/db/uninstall.php';
+    xmldb_block_userbulkdelete_uninstall();
+
     return true;
 
 }

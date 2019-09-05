@@ -27,8 +27,8 @@ function xmldb_block_userbulkdelete_upgrade() {
 
     $result = true;
 
-    $binstance = $DB->get_record_select('block_instances',
-        "blockname = 'userbulkdelete' AND pagetypepattern ='admin-user-user_bulk'");
+    // If the block has no instance, create it!
+    $binstance = $DB->get_record_select('block_instances', "blockname = 'userbulkdelete' ");
     if (!$binstance) {
         // Create a dummy page object referring to user_bulk page & adding the block.
         $pagebulk = new moodle_page();
