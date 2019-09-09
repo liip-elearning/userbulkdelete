@@ -9,8 +9,8 @@ tasks to avoid browsers timeout errors.
 * For this plugin to work properly, it is better to have the cron process well configured on the server, although the 
 asynchronous tasks processing might be launched by running:
  
-    * ```sudo php ./admin/cli/cron.php``` for a full cron experience.
-    * or ```sudo php ./admin/tool/task/cli/adhoc_task.php  --execute``` for a precise adhoc task processing.
+    * ```sudo php ./admin/cli/cron.php``` to run all the cron tasks.
+    * or ```sudo php ./admin/tool/task/cli/adhoc_task.php  --execute``` for a specific adhoc task processing.
       
 
 ## Installation:
@@ -63,16 +63,16 @@ You can choose any of the following methods. As a convention all the commands ar
  it contains a brief explanation of the process and a button to "Perform Bulk Async Deletion".
 
 * Go to http://yourmoodlesite.ch/admin/user/user_bulk.php
-* Select all the users to be deleted from the list.
+* Add to selection, any users you want to be deleted.
 * Click on the "Add to selection" button.
 * The page will refresh automatically, and the selected users will show in the appropriate list.
-* Now you'ready to click the "Perform Bulk Async Deletion" button.
-* You will get to a new interface with the details of the users to be deleted.
+* Now click the "Perform Bulk Async Deletion" button.
+* You will see the confirmation page **userbulkdelete**, with the list of the users to be deleted.
 * Scroll to the bottom of the page and click on the "Start asynchronous deletion" button. 
 
 Note that all of the users that cannot be deleted will automatically be excluded from the process.
 
-At this point everything else should be handled by the cron process, otherwise, the commands to start performing the 
+At this point everything else should be handled by the **cron process**, otherwise, the commands to start performing the
 async deletion tasks can be launched with the commands stated on the "Pre-requisites" section of this document.
 
 
@@ -107,4 +107,4 @@ The best way to unistall the plugin is:
   
  Please do not hesitate to contact us at elearning@liip.ch
  
- Happy user's bulk asynchronous deletion! 
+ Happy user's bulk asynchronous deletion!
