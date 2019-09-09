@@ -24,6 +24,6 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2019090510;
+$plugin->version   = 2019090511;
 $plugin->requires  = 2018050800; // Requires this Moodle version.
 $plugin->component = 'block_userbulkdelete';

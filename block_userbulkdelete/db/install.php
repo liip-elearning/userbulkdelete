@@ -25,7 +25,7 @@ defined('MOODLE_INTERNAL') || die();
 function xmldb_block_userbulkdelete_install() {
     global $DB;
 
-    // If the block is installed, delete it!
+    // If the block has instances, delete them!
     // This is a failsafe, ideally it gets deleted upon plugin uninstall.
     $binstance = $DB->get_record_select('block_instances', "blockname = 'userbulkdelete'");
     if ($binstance) {
