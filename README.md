@@ -62,7 +62,7 @@ You can choose any of the following methods. As a convention all the commands ar
  Upon installation, a custom block has been instantiated on the page http://yourmoodlesite.ch/admin/user/user_bulk.php,
  it contains a brief explanation of the process and a button to "Perform Bulk Async Deletion".
 
-* Go to http://yourmoodlesite.ch/admin/user/user_bulk.php
+* Go to http://yourmoodlesite.ch/admin/user/user_bulk.php, also available on the "Users" tab of the site administration section as "Bulk asynchronous user deletion".
 * Add to selection, any users you want to be deleted.
 * Click on the "Add to selection" button.
 * The page will refresh automatically, and the selected users will show in the appropriate list.
