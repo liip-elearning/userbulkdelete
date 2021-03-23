@@ -38,6 +38,6 @@ scp -P 2202 $archive liip@ps8.ms.bsa.oriented.ch:/var/www/html/archive.maas.liip
 
 git push origin master $tagname
 
-echo "$tagname published at https://zhawboost:eepei4Oo@archive.maas.liip.ch/${plugin_prefix}/${plugin_prefix}-$tagname.zip"
+echo "$tagname published at https://zhawboost:\${PASSWORD}@archive.maas.liip.ch/${plugin_prefix}/${plugin_prefix}-$tagname.zip"
 
 rm -f $archive
