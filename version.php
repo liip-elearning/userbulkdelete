@@ -24,10 +24,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2021032300;
+$plugin->version = 2021032301;
 $plugin->requires  = 2018051700; // Minimum: Moodle 3.5!
 $plugin->component = 'tool_userbulkdelete';
 $plugin->maturity = MATURITY_RC;
-$plugin->release = 'v1.0';
+$plugin->release = 'v1.0.1';
 $plugin->dependencies = ['block_userbulkdelete' => ANY_VERSION];
 
