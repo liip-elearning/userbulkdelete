@@ -63,7 +63,7 @@ class queuecompletion_task extends adhoc_task {
         $details->inqueue = $inqueue;
 
         if (!$inqueue) {
-            // Sending Success the Notification.
+            // Sending the Success Notification.
             $message->subject           = get_string('bulksuccesssubject', 'tool_userbulkdelete');
             $message->fullmessagehtml   = get_string('bulksuccesshtml', 'tool_userbulkdelete', $details);
             message_send($message);
