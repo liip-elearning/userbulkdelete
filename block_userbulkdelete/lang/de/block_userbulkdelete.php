@@ -25,6 +25,6 @@
 $string['pluginname'] = 'Bulk-Asynchronisationslöschblocks für Benutzer hinzufügen';
 $string['blocktitle'] = 'Mehrer Benutzer auf einmal löschen';
 $string['blockcontenttext'] = 'Wenn eine große Anzahl von Benutzern zum Löschen ausgewählt wurde, werden die Aufgaben asynchron im Hintergrund ausgeführt, um Timeout-Probleme beim Server zu vermeiden.<br /><br />';
-$string['blockcontentbutton'] = '<a href="../tool/userbulkdelete" class="btn btn-primary">Asynchrones Bulk-Löschen durchführen</a>';
+$string['blockcontentbutton'] = '<a href="{$a}" class="btn btn-primary">Asynchrones Bulk-Löschen durchführen</a>';
 $string['userbulkdelete:addinstance'] = 'Hinzufügen eines neuen Bulk-Asynchronisationslöschblocks für Benutzer hinzufügen';
 $string['userbulkdelete:myaddinstance'] = 'Hinzufügen eines neuen Bulk-Asynchronisationslöschblocks für Benutzer hinzufügen';

@@ -25,6 +25,6 @@
 $string['pluginname'] = 'Users bulk async deletion block';
 $string['blocktitle'] = 'Bulk asynchronous user deletion';
 $string['blockcontenttext'] = 'When a large amount of users have been selected for deletion, the tasks will be executed asynchronously in the background to avoid server timeout issues.<br /><br />';
-$string['blockcontentbutton'] = '<a href="../tool/userbulkdelete" class="btn btn-primary">Perform Bulk Async Deletion</a>';
+$string['blockcontentbutton'] = '<a href="{$a}" class="btn btn-primary">Perform Bulk Async Deletion</a>';
 $string['userbulkdelete:addinstance'] = 'Add a new Users bulk async deletion block';
 $string['userbulkdelete:myaddinstance'] = 'Add a new Users bulk async deletion block';
