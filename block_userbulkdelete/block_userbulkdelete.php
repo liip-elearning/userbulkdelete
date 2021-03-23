@@ -29,7 +29,11 @@ class block_userbulkdelete extends block_base {
 
         $this->content         = new stdClass;
         $this->content->text   = get_string('blockcontenttext', 'block_userbulkdelete');
-        $this->content->text .= get_string('blockcontentbutton', 'block_userbulkdelete');
+        $this->content->text  .= get_string(
+            'blockcontentbutton',
+            'block_userbulkdelete',
+            (string) (new moodle_url("/admin/tool/userbulkdelete/"))
+        );
 
         return $this->content;
     }

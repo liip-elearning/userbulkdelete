@@ -49,7 +49,17 @@ function xmldb_tool_userbulkdelete_upgrade($oldversion) {
         // Userbulkdelete savepoint reached.
         upgrade_plugin_savepoint(true, 2019090400, 'tool', 'userbulkdelete');
     }
-    
+
+    if ($oldversion < 2021032300) {
+        // Force email values to the new defaults.
+        set_config('message_provider_tool_userbulkdelete_tasks_status_loggedin', 'email,popup' , 'message');
+        set_config('message_provider_tool_userbulkdelete_tasks_status_loggedoff', 'email,popup' , 'message');
+        set_config('popup_provider_tool_userbulkdelete_tasks_status_permitted', 'forced', 'message');
+        set_config('email_provider_tool_userbulkdelete_tasks_status_permitted', 'permitted', 'message');
+
+        upgrade_plugin_savepoint(true, 2021032300, 'tool', 'userbulkdelete');
+    }
+
     // If the block has no instance, create it!
     $binstance = $DB->get_record_select('block_instances', "blockname = 'userbulkdelete'");
     if (!$binstance) {

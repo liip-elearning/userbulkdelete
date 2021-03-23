@@ -26,21 +26,18 @@
  *     - Upgrade API: {@link http://docs.moodle.org/dev/Upgrade_API}
  *
  * @package    tool_userbulkdelete
- * @copyright  2019 Liip
+ * @copyright  2019,2021 Liip
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
 $messageproviders = [
-
     'tasks_status' => [
         'capability' => 'tool/userbulkdelete:view_notification',
         'defaults' => [
             'popup' => MESSAGE_DEFAULT_LOGGEDIN + MESSAGE_DEFAULT_LOGGEDOFF + MESSAGE_FORCED,
-            'email' => MESSAGE_DEFAULT_LOGGEDOFF + MESSAGE_PERMITTED,
+            'email' => MESSAGE_DEFAULT_LOGGEDIN + MESSAGE_DEFAULT_LOGGEDOFF + MESSAGE_PERMITTED,
         ]
     ],
-
-
 ];
