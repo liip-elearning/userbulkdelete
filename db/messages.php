@@ -36,8 +36,8 @@ $messageproviders = [
     'tasks_status' => [
         'capability' => 'tool/userbulkdelete:view_notification',
         'defaults' => [
-            'popup' => MESSAGE_DEFAULT_LOGGEDIN + MESSAGE_DEFAULT_LOGGEDOFF + MESSAGE_FORCED,
-            'email' => MESSAGE_DEFAULT_LOGGEDIN + MESSAGE_DEFAULT_LOGGEDOFF + MESSAGE_PERMITTED,
+            'popup' => MESSAGE_DEFAULT_ENABLED + MESSAGE_FORCED,
+            'email' => MESSAGE_DEFAULT_ENABLED + MESSAGE_PERMITTED,
         ]
     ],
 ];
